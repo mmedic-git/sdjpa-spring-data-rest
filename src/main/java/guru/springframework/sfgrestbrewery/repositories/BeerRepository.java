@@ -6,10 +6,12 @@ import guru.springframework.sfgrestbrewery.domain.BeerStyleEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.UUID;
 
-
+// ovo je da ne izgenerira po defaultu path http://localhost:8080/api/v1/beers, http://localhost:8080/api/v1/beer , u jednini, po traženoj specifikaciji. collectionResourceRel = beer ako želiš da unutar json-na bude "jednina" za kolekciju objekata, a ne množina, kako je po defaultu
+@RepositoryRestResource(path = "beer", collectionResourceRel = "beer")
 public interface BeerRepository extends JpaRepository<Beer, UUID> {
     Page<Beer> findAllByBeerName(String beerName, Pageable pageable);
 
